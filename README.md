@@ -1,2 +1,3 @@
 # terraform-learning
-Training purposes Repo.
+
+Training purposes Repository.
