@@ -10,4 +10,4 @@
 
 #Modules Directory
 .terraform/
-.DS.Store
+.DS_Store
