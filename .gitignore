@@ -11,3 +11,4 @@
 #Modules Directory
 .terraform/
 .DS_Store
+.idea
