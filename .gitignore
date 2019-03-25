@@ -9,6 +9,6 @@
 *.tfvars
 
 #Modules Directory
-.terraform/
+.terraform/*
 .DS_Store
 .idea
