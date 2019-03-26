@@ -1,11 +1,20 @@
 ### Google Infrastructure
-
 # Creates a new VPC in GCP.
 resource "google_compute_network" "vpc-test-2" {
   name = "devnetwork"
   auto_create_subnetworks = false
 }
 
+# Add subnet to Google Network
+resource "google_compute_subnetwork" "dev-subnet" {
+  ip_cidr_range = "10.0.1.0/24"
+  name = "devsubnet"
+  network = "${google_compute_network.vpc-test-2.self_link}"
+  region = "us-west1"
+
+}
+
+### AWS Infrastructure
 # Creates a new VPC in AWS.
 resource  "aws_vpc" "environment-example-two" {
   cidr_block = "10.0.0.0/16"
@@ -16,7 +25,6 @@ resource  "aws_vpc" "environment-example-two" {
   }
 }
 
-### AWS Infrastructure
 # Creates subnets in AWS vpc
 resource "aws_subnet" "subnet1" {
   cidr_block = "${cidrsubnet(aws_vpc.environment-example-two.cidr_block, 3, 1)}"
@@ -37,6 +45,7 @@ resource "aws_subnet" "subnet2" {
 
 }
 
+# Adds Security Group for the VPC
 resource "aws_security_group" "aws-security" {
   vpc_id = "${aws_vpc.environment-example-two.id}"
 
