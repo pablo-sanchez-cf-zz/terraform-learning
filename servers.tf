@@ -1,8 +1,9 @@
-#GCP Servers
+#GCP Servers resource
 resource "google_compute_instance" "first-server" {
-  machine_type = "n1-standard-1"
-  name         = "thefirstserver"
-  zone         = "us-west1-a"
+  machine_type              = "g1-small"
+  name                      = "thefirstserver"
+  zone                      = "us-west1-a"
+  allow_stopping_for_update = true
 
   boot_disk {
     initialize_params {
@@ -18,6 +19,10 @@ resource "google_compute_instance" "first-server" {
 
   metadata {
     foo = "bar"
+  }
+
+  labels {
+    environment = "development"
   }
 
   service_account {
