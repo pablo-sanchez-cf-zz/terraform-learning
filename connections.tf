@@ -1,7 +1,7 @@
 provider "google" {
   credentials = "${file("../account.json")}"
-  project = "terraform-trash-course"
-  region  = "us-east1"
+  project     = "terraform-trash-course"
+  region      = "us-east1"
 }
 
 provider "aws" {
@@ -10,7 +10,7 @@ provider "aws" {
 
 provider "azurerm" {
   subscription_id = "0"
-  client_id = "1"
-  client_secret = "2"
-  tenant_id = "3"
+  client_id       = "1"
+  client_secret   = "2"
+  tenant_id       = "3"
 }

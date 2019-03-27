@@ -1,8 +1,8 @@
 #GCP Servers
 resource "google_compute_instance" "first-server" {
   machine_type = "n1-standard-1"
-  name = "thefirstserver"
-  zone = "us-west1-a"
+  name         = "thefirstserver"
+  zone         = "us-west1-a"
 
   boot_disk {
     initialize_params {
@@ -13,8 +13,7 @@ resource "google_compute_instance" "first-server" {
   network_interface {
     subnetwork = "${google_compute_subnetwork.dev-subnet.name}"
 
-    access_config {
-    }
+    access_config {}
   }
 
   metadata {
@@ -23,7 +22,7 @@ resource "google_compute_instance" "first-server" {
 
   service_account {
     scopes = ["userinfo-email", "compute-ro", "storage-ro"]
-      }
+  }
 }
 
 #AWS Servers
@@ -33,28 +32,31 @@ data "aws_ami" "ubuntu" {
 
   filter {
     name = "name"
+
     values = [
-      "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*"]
+      "ubuntu/images/hvm-ssd/ubuntu-trusty-14.04-amd64-server-*",
+    ]
   }
 
   filter {
     name = "virtualization-type"
+
     values = [
-      "hvm"]
+      "hvm",
+    ]
   }
 
   owners = [
-    "099720109477"]
+    "099720109477",
+  ]
 }
 
-
-
 resource "aws_instance" "second-server" {
-  ami = "${data.aws_ami.ubuntu.id}"
+  ami           = "${data.aws_ami.ubuntu.id}"
   instance_type = "t2.micro"
 
   tags {
-    Name = "identifiertag"
+    Name    = "identifiertag"
     Managed = "Terraform"
   }
 
